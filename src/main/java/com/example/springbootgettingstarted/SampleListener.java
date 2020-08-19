@@ -14,10 +14,13 @@ public class SampleListener implements ApplicationRunner { //application이 실�
 
     @Autowired
     KeesunProperties keesunProperties;
+    @Autowired
+    private String hello;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
         System.out.println("==============");
+        System.out.println(hello);
         System.out.println(keesunProperties.getName());
         System.out.println(keesunProperties.getAge());
         System.out.println("==============");
