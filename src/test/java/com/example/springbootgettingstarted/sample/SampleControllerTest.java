@@ -1,5 +1,9 @@
 package com.example.springbootgettingstarted.sample;
 
+import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlHeading1;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,11 +20,12 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 @RunWith(SpringRunner.class)
@@ -32,13 +37,35 @@ public class SampleControllerTest {
     @Rule
     public OutputCaptureRule outputCaptureRule = new OutputCaptureRule();
 
+//    @Autowired
+//    MockMvc mockMvc;
     @Autowired
-    MockMvc mockMvc;
+    WebClient webClient; //html 전용 htmlUnit
     @Test
     public void hello() throws Exception {
-        when(mockSampleService.getName()).thenReturn("whiteship");
-        mockMvc.perform(get("/hello"))
-                .andExpect(content().string("hello whiteship"));
-        assertThat(outputCaptureRule.toString()).contains("test");
+        HtmlPage page = webClient.getPage("/hello");
+        HtmlHeading1 h1 = page.getFirstByXPath("//h1");
+        assertThat(h1.getTextContent()).isEqualToIgnoringCase("keesun");
+
+
+
+        // 요청 "/"
+        // 응답
+        // - 모델 name : keesun
+        // - 뷰 이름 : hello
+
+//        mockMvc.perform(get("/hello"))
+//                .andExpect(status().isOk())
+//                .andDo(print())
+//                .andExpect(view().name("hello"))
+//                .andExpect(model().attribute("name",is("keesun")))
+//                .andExpect(content().string(containsString("keesun")));
+
+
+
+//        when(mockSampleService.getName()).thenReturn("whiteship");
+//        mockMvc.perform(get("/hello"))
+//                .andExpect(content().string("hello whiteship"));
+//        assertThat(outputCaptureRule.toString()).contains("test");
     }
 }
