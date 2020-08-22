@@ -12,10 +12,10 @@ public class SampleController {
     private SampleService sampleService;
     private Logger logger = LoggerFactory.getLogger(SampleController.class);
 
-    @GetMapping("/hello")
-    public String hello(){
-        logger.info("test");
-        return "hello "+sampleService.getName();
-    }
+//    @GetMapping("/hello")
+//    public String hello(){
+//        logger.info("test");
+//        return "hello "+sampleService.getName();
+//    }
 
 }
