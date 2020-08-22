@@ -15,3 +15,17 @@ Spring Boot의 기본 원리
 &nbsp; &nbsp;● org.springframework.boot.autoconfigure.EnableAutoConfiguration <br/>
 &nbsp; &nbsp;&nbsp; &nbsp;○ @Configuration <br/>
 &nbsp; &nbsp;&nbsp; &nbsp;○ @ConditionalOnXxxYyyZzz <br/>
+
+## 2. 스프링 웹 MVC : 정적 리소스 지원
+정적 리소스 맵핑 "/**" <br/>
+&nbsp;&nbsp;● 기본 리소스 위치 <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;○ classpath:/static <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;○ classpath:/public <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;○ classpath:/resources <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;○ classpath:/META-INF/resources <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;○ 예) "/hello.html" => /static/hello.html <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;○ spring.mvc.static-path-pattern: 맵핑 설정 변경 가능 <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;○ spring.mvc.static-locations: 리소스 찾을 위치 변경 가능 <br/>
+&nbsp;&nbsp;● Last-Modified 헤더를 보고 304 응답을 보냄<br/>
+&nbsp;&nbsp;● ResourceHttpRequestHandler가 처리함<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;○ WebMvcConfigurer의 addResourceHandlers로 커스터마이징 가능<br/>
