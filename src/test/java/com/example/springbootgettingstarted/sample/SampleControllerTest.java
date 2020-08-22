@@ -41,13 +41,21 @@ public class SampleControllerTest {
 //    MockMvc mockMvc;
     @Autowired
     WebClient webClient; //html 전용 htmlUnit
+    @Autowired
+    MockMvc mockMvc;
+    @Test
+    public void htmlUnitTest() throws Exception {
+        mockMvc.perform(get("/htmlUnitTest"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$._links.self").exists());
+    }
+
     @Test
     public void hello() throws Exception {
         HtmlPage page = webClient.getPage("/hello");
         HtmlHeading1 h1 = page.getFirstByXPath("//h1");
         assertThat(h1.getTextContent()).isEqualToIgnoringCase("keesun");
-
-
 
         // 요청 "/"
         // 응답
