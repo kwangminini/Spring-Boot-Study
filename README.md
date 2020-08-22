@@ -29,3 +29,21 @@ Spring Boot의 기본 원리
 &nbsp;&nbsp;● Last-Modified 헤더를 보고 304 응답을 보냄<br/>
 &nbsp;&nbsp;● ResourceHttpRequestHandler가 처리함<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;○ WebMvcConfigurer의 addResourceHandlers로 커스터마이징 가능<br/>
+
+## 3. 스프링 웹 MVC : Thymeleaf
+스프링 부트가 자동설정을 지원하는 템플릿 엔진 <br/>
+&nbsp;&nbsp;● FreeMarker <br/>
+&nbsp;&nbsp;● Groovy <br/>
+&nbsp;&nbsp;● Thymeleaf<br/>
+&nbsp;&nbsp;● Mustache<br/>
+<br/>
+JSP를 권장하지 않는 이유 <br/>
+&nbsp;&nbsp;● JAR패키징 할 때는 동작하지 않고, WAR 패키징 해야 함<br/>
+&nbsp;&nbsp;● Undertow는 JSP를 지원하지 않음<br/>
+
+
+
+
+
+
+
