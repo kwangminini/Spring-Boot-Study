@@ -11,6 +11,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.boot.context.event.ApplicationStartingEvent;
 import org.springframework.context.ApplicationListener;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
@@ -27,28 +28,36 @@ public class SampleListener implements ApplicationRunner { //application이 실�
     StringRedisTemplate redisTemplate;
     @Autowired
     AccountRepository accountRepository;
+    @Autowired
+    MongoTemplate mongoTemplate;
 
     @Autowired
     private String hello;
     private Logger logger = LoggerFactory.getLogger(SampleListener.class);
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        ValueOperations<String,String>  values = redisTemplate.opsForValue();
-        values.set("keesun","whiteship");
-        values.set("springboot","2.0");
-        values.set("hello","world");
-
         Account account = new Account();
-        account.setEmail("kwangmin@email.com");
-        account.setUsername("keesun");
-        accountRepository.save(account);
+        account.setEmail("test2@gmail.com");
+        account.setUsername("aaa2");
+        accountRepository.insert(account);
+        System.out.println("finished");
 
-        Optional<Account> byId = accountRepository.findById(account.getId());
-        System.out.println(account);
-        System.out.println(account.getId());
-        System.out.println(byId.get().getId());
-        System.out.println(byId.get().getUsername());
-        System.out.println(byId.get().getEmail());
+//        ValueOperations<String,String>  values = redisTemplate.opsForValue();
+//        values.set("keesun","whiteship");
+//        values.set("springboot","2.0");
+//        values.set("hello","world");
+//
+//        Account account = new Account();
+//        account.setEmail("kwangmin@email.com");
+//        account.setUsername("keesun");
+//        accountRepository.save(account);
+//
+//        Optional<Account> byId = accountRepository.findById(account.getId());
+//        System.out.println(account);
+//        System.out.println(account.getId());
+//        System.out.println(byId.get().getId());
+//        System.out.println(byId.get().getUsername());
+//        System.out.println(byId.get().getEmail());
 
     }
 }
